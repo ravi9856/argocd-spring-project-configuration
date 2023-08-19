@@ -1,0 +1,1 @@
+# argocd-spring-project-configuration
