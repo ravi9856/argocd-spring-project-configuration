@@ -1,0 +1,24 @@
+# This is the configuration for argoCD
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-argo-application
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://gitlab.com/nanuchi/argocd-app-config.git
+    targetRevision: HEAD
+    path: dev # Path to root folder in repo
+  destination: 
+    server: https://kubernetes.default.svc # As we are running ArgoCD inside destination cluster itself, this is the path. This is the internal service name for K8S API Server
+    namespace: myapp # This is the namespace where we want our application to be deployed
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true # This will create a namespace if it doesn't exists
+
+    automated: # This will enable the "automatic" way of ArgoCD, can be manual too
+      selfHeal: true # This will override any manual changes to cluster
+      prune: true # This will delete the pods if configuration is deleted (like service.yaml file delete)
