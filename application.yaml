@@ -8,7 +8,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://gitlab.com/nanuchi/argocd-app-config.git
+    repoURL: https://github.com/ravi9856/argocd-spring-project-configuration
     targetRevision: HEAD
     path: dev # Path to root folder in repo
   destination: 
